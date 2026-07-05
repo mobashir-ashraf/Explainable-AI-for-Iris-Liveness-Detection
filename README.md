@@ -65,13 +65,13 @@ Week 3 focused on advancing the evaluation pipeline from ideal laboratory condit
 | **Inference Latency** | **0.613 ms** | 0.819 ms |
 
 ### 4. Bottleneck & Defect Analysis
-* **The Expected Metric Drop:** While Week 2 models surpassed $99\%$ accuracy on pristine images, introducing aggressive structural and lighting noise challenged spatial boundaries. This drop establishes an authentic, robust baseline.
-* **The Low-Recall Crisis:** Both models suffered a severe drop in Recall ($58.76\%$ and $18.64\%$), heavily degrading F1-scores. 
+* **The Expected Metric Drop:** While Week 2 models surpassed 99% accuracy on pristine images, introducing aggressive structural and lighting noise challenged spatial boundaries. This drop establishes an authentic, robust baseline.
+* **The Low-Recall Crisis:** Both models suffered a severe drop in Recall (58.76% and 18.64%), heavily degrading F1-scores. 
   1. This stems directly from dataset class imbalance (~20k live samples vs. ~13k spoof attacks).
   2. Under severe noise, fine iris features are obscured, causing the networks to develop an operational bias toward the majority class ("Live").
-  3. **MobileNetV2** exhibited significantly higher resilience, maintaining a $40.12\%$ higher recall and faster inference ($0.613\text{ ms}$) than EfficientNetB0.
+  3. **MobileNetV2** exhibited significantly higher resilience, maintaining a 40.12% higher recall and faster inference ($0.613\text{ ms}$) than EfficientNetB0.
 
 ### 5. Strategic Project Alignment
-* **Direct Hook for Week 4 (Explainable AI):** The $81.25\%$ baseline sets up a perfect diagnostic playground. Integrating **Grad-CAM** and **SHAP** next week will let us visualize exactly which noise artifacts misguide the spatial attention maps.
+* **Direct Hook for Week 4 (Explainable AI):** The 81.25% baseline sets up a perfect diagnostic playground. Integrating **Grad-CAM** and **SHAP** next week will let us visualize exactly which noise artifacts misguide the spatial attention maps.
 * **Justification for Weeks 5 & 6:** The failure of static spatial features under noise proves image analysis alone is insufficient. This explicitly justifies the necessity of the upcoming **Temporal Biometrics Module** (blink/pupil dynamics) and **Spoof Confidence Decomposition Engine** to break class bias.
 ---
