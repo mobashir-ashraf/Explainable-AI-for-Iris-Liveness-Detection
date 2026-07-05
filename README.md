@@ -59,7 +59,7 @@ Week 3 focused on advancing the evaluation pipeline from ideal laboratory condit
 | Evaluation Metric | MobileNetV2 (Selected Baseline) | EfficientNetB0 |
 | :--- | :--- | :--- |
 | **Classification Accuracy** | **81.25%** | 69.73% |
-| **Precision** | **77.42%** | 76.51% |
+| **Precision** | **81.89%** | 75.00% |
 | **Recall (Sensitivity)** | **58.76%** | 18.64% |
 | **F1-Score** | **68.42%** | 29.86% |
 | **Inference Latency** | **0.613 ms** | 0.819 ms |
