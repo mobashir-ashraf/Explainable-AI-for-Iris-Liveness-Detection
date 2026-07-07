@@ -74,4 +74,28 @@ Week 3 focused on advancing the evaluation pipeline from ideal laboratory condit
 ### 5. Strategic Project Alignment
 * **Direct Hook for Week 4 (Explainable AI):** The 81.25% baseline sets up a perfect diagnostic playground. Integrating **Grad-CAM** and **SHAP** next week will let us visualize exactly which noise artifacts misguide the spatial attention maps.
 * **Justification for Weeks 5 & 6:** The failure of static spatial features under noise proves image analysis alone is insufficient. This explicitly justifies the necessity of the upcoming **Temporal Biometrics Module** (blink/pupil dynamics) and **Spoof Confidence Decomposition Engine** to break class bias.
+
 ---
+
+## 📅 Week 4 Progress: Explainable AI (XAI) Pipeline Integration
+
+### 1. Objective & Scope
+Week 4 focused on transitioning our Iris Presentation Attack Detection (PAD) framework from an opaque "black-box" model into a transparent, interpretable vision pipeline. By integrating post-hoc feature attribution frameworks, we visually diagnosed the network's spatial decision boundaries and audited activation maps. This step allows us to isolate the exact regional anomalies causing the static spatial performance drop and majority-class bias observed during Week 3 noise stress testing.
+
+### 2. Technical Implementations
+* **Macroscopic Feature Routing (Grad-CAM):** Developed a custom, pure-PyTorch hook engine (`VisualGradCAMEngine`) that registers to the final convolutional block of our selected MobileNetV2 backbone (`features[18][0]`). This intercepts forward feature maps and backward target gradients to compute linearly weighted activation fields.
+* **Microscopic Game-Theoretic Attributions (SHAP):** Configured game-theoretic Gradient SHAP models via the `captum` library. By evaluating expectations over lines connecting an absolute zero background baseline to the input tensor across local samples, it extracts exact, pixel-by-pixel credit/blame distributions.
+* **Unified Diagnostic Visual Studio:** Synthesized raw activation matrices into high-contrast spatial layouts. Coarse attention grids are upsampled to $224 \times 224$, mapped via an OpenCV `COLORMAP_JET` thermal profile, and alpha-blended ($65\%$ image / $35\%$ heatmap) alongside pixel-level `inferno` SHAP matrices.
+* **Rigorous 3-Way Data Split Validation:** Maintained complete data integrity by validating model weights against the isolated 15% Validation split before running final benchmark evaluations.
+
+### 3. Interpretability & Failure Diagnostic Analysis
+* **Visual Verification of Explainability Deliverables:** 1. **Explainable Prediction Pipeline:** Converted a blind prediction score into an auditable decision path. Every logit outcome is paired with a corresponding explainability context.
+  2. **Heatmap Visualization Outputs:** Warm thermal zones (red/orange) confirm that the model focuses its macroscopic attention on critical biometric boundaries—such as papillary contours, fake lens borders, and high-frequency print artifacts—while completely ignoring background noise.
+  3. **Feature Attribution Analysis:** The high-contrast pixel scatter plots reveal exactly how credit is distributed at a microscopic level, highlighting the specific micro-textures that triggered spoof detection.
+
+---
+
+### 4. Strategic Project Alignment
+* **Validation Studio Layout Matrix:** When evaluating samples across the test split, the studio outputs a 4-column diagnostic plot directly below the running code:
+  ```text
+  [ Raw Input Iris ] ──> [ Grad-CAM Heatmap ] ──> [ Decision Overlay ] ──> [ SHAP Attribution ]
