@@ -93,9 +93,31 @@ Week 4 focused on transitioning our Iris Presentation Attack Detection (PAD) fra
   2. **Heatmap Visualization Outputs:** Warm thermal zones (red/orange) confirm that the model focuses its macroscopic attention on critical biometric boundaries—such as papillary contours, fake lens borders, and high-frequency print artifacts—while completely ignoring background noise.
   3. **Feature Attribution Analysis:** The high-contrast pixel scatter plots reveal exactly how credit is distributed at a microscopic level, highlighting the specific micro-textures that triggered spoof detection.
 
----
-
 ### 4. Strategic Project Alignment
 * **Validation Studio Layout Matrix:** When evaluating samples across the test split, the studio outputs a 4-column diagnostic plot directly below the running code:
   ```text
   [ Raw Input Iris ] ──> [ Grad-CAM Heatmap ] ──> [ Decision Overlay ] ──> [ SHAP Attribution ]
+
+---
+
+## 📅 Week 5 Progress: Temporal Biometrics Module
+
+### 🎯 Objectives & Tasks
+* **Analyze Temporal Eye Behavior:** Transition from static 2D image profiling to tracking dynamic eye behavior over consecutive frames.
+* **Capture Motion-Based Liveness:** Track changes over time to differentiate living eye movement from rigid presentation attacks (printouts/replays).
+* **Implement Biometric Tracking:**
+  * **Blink Detection:** Monitor frame-to-frame pixel change energy spikes.
+  * **Pupil Dynamics:** Model temporal fluctuations (dilation/constriction) of the pupil area.
+  * **Frame Consistency:** Use structural cross-correlation coefficients to verify smooth, biological movement.
+
+### 🏗️ Model Architecture
+A hybrid deep learning backbone optimized for time-series sequences:
+* **Spatial Feature Extractor:** A frozen pre-trained **MobileNetV2** backbone that converts sequence frames into lightweight 1280-dimensional feature tensors.
+* **Temporal Encoder:** A recurrent **LSTM Network** (hidden_dim=64) that processes the chronological timeline of features to calculate liveness probabilities.
+
+### 📊 Deliverables & Results
+* **Temporal Biometrics Module:** Fully operational 3-way dataset split (70% Train, 15% Val, 15% Test) running high-throughput PyTorch DataLoaders.
+* **Blink & Pupil Analysis System:** Real-time extraction of time-series biometric vectors.
+* **Visual Diagnostic Studio:** Renders a clean 3-panel dashboard mapping **Absolute Energy Delta**, **Estimated Pupil Area**, and **Structural Correlation Scores** to provide clear project verification.
+
+---
