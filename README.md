@@ -102,7 +102,7 @@ Week 4 focused on transitioning our Iris Presentation Attack Detection (PAD) fra
 
 ## 📅 Week 5 Progress: Temporal Biometrics Module
 
-### 🎯 Objectives & Tasks
+### 1. Objectives & Tasks
 * **Analyze Temporal Eye Behavior:** Transition from static 2D image profiling to tracking dynamic eye behavior over consecutive frames.
 * **Capture Motion-Based Liveness:** Track changes over time to differentiate living eye movement from rigid presentation attacks (printouts/replays).
 * **Implement Biometric Tracking:**
@@ -110,14 +110,84 @@ Week 4 focused on transitioning our Iris Presentation Attack Detection (PAD) fra
   * **Pupil Dynamics:** Model temporal fluctuations (dilation/constriction) of the pupil area.
   * **Frame Consistency:** Use structural cross-correlation coefficients to verify smooth, biological movement.
 
-### 🏗️ Model Architecture
+### 2. Model Architecture
 A hybrid deep learning backbone optimized for time-series sequences:
 * **Spatial Feature Extractor:** A frozen pre-trained **MobileNetV2** backbone that converts sequence frames into lightweight 1280-dimensional feature tensors.
 * **Temporal Encoder:** A recurrent **LSTM Network** (hidden_dim=64) that processes the chronological timeline of features to calculate liveness probabilities.
 
-### 📊 Deliverables & Results
+### 3. Deliverables & Results
 * **Temporal Biometrics Module:** Fully operational 3-way dataset split (70% Train, 15% Val, 15% Test) running high-throughput PyTorch DataLoaders.
 * **Blink & Pupil Analysis System:** Real-time extraction of time-series biometric vectors.
 * **Visual Diagnostic Studio:** Renders a clean 3-panel dashboard mapping **Absolute Energy Delta**, **Estimated Pupil Area**, and **Structural Correlation Scores** to provide clear project verification.
+
+---
+
+## 📅 Week 6 Progress: Spoof Confidence Decomposition Module
+
+### 1. Dataset Acquisition & Environment Setup
+* The script initializes execution on a CUDA GPU if one is available on the system.
+* It configures Kaggle API credentials to download the **casia-iris-thousand** dataset.
+* The code automatically provisions a structured directory system for isolating live samples from various spoof types (physical printed, replay, textured contact lenses, and synthetic attacks).
+* Five sample image paths are loaded into memory for confidence decomposition testing.
+
+### 2. Confidence Decomposition Engine
+* A Python class named `ConfidenceDecompositionEngine` is established to separate a single liveness prediction score into three standalone factors: Texture, Motion, and Reflection.
+* The class simulates the model's metric generation across five distinct presentation types.
+* Live samples are algorithmically assigned high liveness probabilities, while spoofed samples receive a low overall confidence score paired with specific subsystem anomalies.
+
+### 3. Interpretable Spoof Reasoning
+* The `generate_reasoning_output` function translates numerical metrics into explicit, hardware-defensive telemetry logs.
+
+| Biometric Sub-metric | Authentic Indicator (> 50%) | Anomaly Indicator (< 50%) |
+| **Texture Confidence** | Authentic high-frequency iris patterns detected. | Artifacts, blur, print dot-matrix, or synthetic generation artifact detected. |
+| **Motion Confidence** | Natural blink and pupil dynamics verified. | Static or rigid presentation detected. |
+| **Reflection Confidence** | Genuine corneal specular reflection verified. | Matte surface, screen glare, or synthetic illumination profile detected. |
+
+### 4. Visualization & Output
+* The `plot_confidence_contribution` function utilizes **matplotlib** to generate a 5-panel bar graph.
+* The visualization maps the separated feature contributions (Texture, Motion, and Reflection) across the Live, Print, Screen, Lens, and Synthetic scenarios.
+* The final layout is saved locally as a high-resolution PNG image for project verification.
+
+---
+
+## 📅 Week 7 Progress: Spoof Confidence Decomposition Module
+
+### 1. Objectives & Tasks
+* **Robustness Evaluation Engine:** Built an automated testing harness to evaluate model accuracy under high-stress operational parameters.
+* **Environmental Variance Controls:** Implemented adaptive lighting modifiers to evaluate recognition stability under underexposed (Low Light) and overexposed (Bright Light) environments.
+* **Biometric Auditing Infrastructure:** Engineered full support for calculating standardized ISO/IEC 30107-3 error metrics, including **APCER** (Attack Presentation Classification Error Rate), **BPCER** (Bona Fide Presentation Classification Error Rate), and **ACER** (Average Classification Error Rate).
+* **Diagnostic Visualizations:** Automated generation of high-resolution Confusion Matrices and Receiver Operating Characteristic (ROC) profiles.
+
+### 2. Automated Dataset Ingestion & Isolation
+* The script checks for GPU availability (`cuda`) to run hardware-accelerated batch inference.
+* Configures secure Kaggle API hooks to ingest the **CASIA-Iris-Thousand** dataset (Bona Fide live samples) and the **CASIA-Iris-Syn** dataset (Synthetic samples).
+* Maps local paths dynamically, isolating source assets from synthesized presentation attack vectors.
+
+### 3. High-Fidelity Presentation Attack Simulator
+* **Print Attack:** Applies structured Gaussian blurs combined with precise Look-Up Table (LUT) gamma curves to strip original high-frequency details.
+* **Replay Attack:** Introduces sinusoidal mesh arrays to emulate digital monitor frequency interference and specular screen spots.
+* **Contact Lens Attack:** Distributes structural micro-circles matching common cosmetic lens patterns over the real iris frame.
+* **Synthetic Attack:** Multiplies specific coordinate coefficients inside the Fast Fourier Transform (FFT) frequency spectrum of pure synthetic samples.
+
+### 4. Stress-Testing Data Pipeline
+* A custom PyTorch `RobustnessEvaluationDataset` maps the compiled datasets into evaluation batches.
+* Dynamically shifts image matrix values to evaluate extreme brightness thresholds (multiplied by `0.55` for severe underexposure and `1.45` for extreme glare).
+
+### 5. Biometric Auditing & Metrics Calculation
+* Passes batches through a ResNet architecture evaluation pipeline to generate test confidence rankings.
+* Calculates explicit security metrics, allowing immediate diagnosis of structural weak points (e.g., verifying if textured lenses lower accuracy more than standard print vectors).
+
+## 6. Biometric Performance Metrics Summary
+The framework computes precise error parameters to ensure standard biometric security validation:
+
+| Biometric Metric | Security Context | Operational Definition |
+| **APCER** | False Acceptance Rate (FAR) | Percentage of presentation attacks incorrectly classified as live samples. |
+| **BPCER** | False Rejection Rate (FRR) | Percentage of genuine (bona fide) live samples incorrectly flagged as attacks. |
+| **ACER** | Overall System Balance | The average error rate balancing security (APCER) and user convenience (BPCER). |
+
+## 7. Performance Visualizations & Logs
+Upon executing the evaluation pipeline, the module saves automated analytical plots directly to the `outputs/metrics/` folder:
+* **Standard Confusion Matrix:** Maps exact counts of True Positives, True Negatives, False Positives (APCER events), and False Negatives (BPCER events).
+* **Receiver Operating Characteristic (ROC) Profile:** Measures the Area Under the Curve (AUC) across all evaluated stress variables to define structural liveness boundaries.
 
 ---
