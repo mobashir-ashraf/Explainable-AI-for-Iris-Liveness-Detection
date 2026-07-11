@@ -177,7 +177,7 @@ A hybrid deep learning backbone optimized for time-series sequences:
 * Passes batches through a ResNet architecture evaluation pipeline to generate test confidence rankings.
 * Calculates explicit security metrics, allowing immediate diagnosis of structural weak points (e.g., verifying if textured lenses lower accuracy more than standard print vectors).
 
-## 6. Biometric Performance Metrics Summary
+### 6. Biometric Performance Metrics Summary
 The framework computes precise error parameters to ensure standard biometric security validation:
 
 | Biometric Metric | Security Context | Operational Definition |
@@ -185,7 +185,7 @@ The framework computes precise error parameters to ensure standard biometric sec
 | **BPCER** | False Rejection Rate (FRR) | Percentage of genuine (bona fide) live samples incorrectly flagged as attacks. |
 | **ACER** | Overall System Balance | The average error rate balancing security (APCER) and user convenience (BPCER). |
 
-## 7. Performance Visualizations & Logs
+### 7. Performance Visualizations & Logs
 Upon executing the evaluation pipeline, the module saves automated analytical plots directly to the `outputs/metrics/` folder:
 * **Standard Confusion Matrix:** Maps exact counts of True Positives, True Negatives, False Positives (APCER events), and False Negatives (BPCER events).
 * **Receiver Operating Characteristic (ROC) Profile:** Measures the Area Under the Curve (AUC) across all evaluated stress variables to define structural liveness boundaries.
