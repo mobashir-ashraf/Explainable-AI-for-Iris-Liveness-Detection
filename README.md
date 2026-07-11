@@ -150,7 +150,7 @@ A hybrid deep learning backbone optimized for time-series sequences:
 
 ---
 
-## 📅 Week 7 Progress: Experimental_Evaluation Module
+## 📅 Week 7 Progress: Experimental Evaluation Module
 
 ### 1. Objectives & Tasks
 * **Robustness Evaluation Engine:** Built an automated testing harness to evaluate model accuracy under high-stress operational parameters.
